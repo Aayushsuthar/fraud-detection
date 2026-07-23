@@ -45,18 +45,34 @@ The most important features were V14, V10 and V12 - the same signals that show u
 
 ## Run it locally
 
+First train the model (this downloads the public dataset and writes the three artifact files):
+
 ```bash
 pip install -r requirements.txt
+python train.py
+```
+
+That produces fraud_model.joblib, fraud_scaler.joblib and feature_cols.json. Then start the app:
+
+```bash
 python app.py
 ```
 
-The app expects fraud_model.joblib, fraud_scaler.joblib and feature_cols.json next to it. It opens on http://127.0.0.1:7860.
+It opens on http://127.0.0.1:7860.
 
 ## Deploy on Hugging Face Spaces
 
-1. Create a new Space and pick the Gradio SDK.
-2. Upload app.py, requirements.txt and the three artifact files.
-3. The Space builds itself and the demo goes live.
+1. Run train.py once locally to generate the three artifact files.
+2. Create a new Space and pick the Gradio SDK.
+3. Upload app.py, requirements.txt and the three artifact files.
+4. The Space builds itself and the demo goes live.
+
+## Files
+
+- train.py - trains the model and saves the artifacts
+- app.py - the Gradio demo that loads the artifacts and scores transactions
+- feature_cols.json - the exact feature order the model expects
+- requirements.txt - dependencies
 
 ## Notes
 
